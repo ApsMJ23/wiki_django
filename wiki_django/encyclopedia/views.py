@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . import util
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 import markdown2
 from django.utils.html import format_html
@@ -9,7 +9,7 @@ from django.utils.html import format_html
 #Creating a django Form
 class add_entry_form(forms.Form):
     title = forms.CharField(widget = forms.TextInput(attrs={"class":"form-control"}))
-    content = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control"}))
+    content = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control"}),help_text="Write your content in Markdown. (Please refer to 'markdownguide.org')")
 
 # Create your views here.
 
@@ -59,4 +59,20 @@ def add_entry(request):
     return render(request, "encyclopedia/add.html",{
         "form":add_entry_form()
     })   
-        
+
+
+#SEARCH BAR
+def search_entry(request):
+    title = request.GET.get("q")
+    entry1 = util.list_entries()
+    for i in entry1:
+        if i.lower() == title.lower(): 
+            show_entry = format_html(markdown2.markdown(util.get_entry(i)))
+            return render(request, "encyclopedia/entry.html", {
+                "entry" : show_entry,
+                "title" : title  
+            })
+    if not title:
+        return render(request, "encyclopedia/error.html")
+    
+    
