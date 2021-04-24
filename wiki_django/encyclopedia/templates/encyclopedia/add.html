@@ -1,0 +1,17 @@
+{% extends 'encyclopedia/layout.html' %} {% load static %}{% block title %} Add Page {% endblock %} {% block body %} {% csrf_token %}
+<link href="{% static 'encyclopedia/style.css' %}" rel="stylesheet">
+<h1>Add An Entry!!</h1>
+<div class="form">
+    <form action="add_entry" method="post">
+
+        {% csrf_token %}
+        <div class="form-group">
+            {{form.as_p}}
+        </div>
+        <div id="row1" class="row">
+            <a name="" id="reset_btn_add" class="btn btn-primary " href="{% url 'add_entry' %}" role="button">Reset</a>
+            <input id="submit_btn_add" class="btn btn-primary" type="submit">
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+#reset_btn_add {
+    margin-left: 15px;
+    margin-right: 270px;
+    font-weight: 800;
+    justify-self: start;
+}
+
+#submit_btn_add {
+    font-weight: 800;
+    justify-self: end;
+}
+
+#reset_btn_add:hover {
+    background-color: #b71c1c;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#submit_btn_add:hover {
+    background-color: #4c8c4a;
+}
