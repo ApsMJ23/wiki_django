@@ -3,6 +3,7 @@ from . import util
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
+from random import choice
 import markdown2
 from django.utils.html import format_html
 
@@ -74,5 +75,6 @@ def search_entry(request):
             })
     if not title:
         return render(request, "encyclopedia/error.html")
-    
-    
+
+def random(request):
+    return show_entry(request, choice(util.list_entries())) 
